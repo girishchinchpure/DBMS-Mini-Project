@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head"><div><p class="eyebrow">New Record</p><h1>Add Student</h1></div></div>
+<section class="card form-card">
+<form method="post" class="form-grid">
+  <label>First name<input name="first_name" required></label>
+  <label>Last name<input name="last_name" required></label>
+  <label>Date of birth<input type="date" name="dob"></label>
+  <label>Gender<select name="gender"><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select></label>
+  <label>Email<input type="email" name="email" required></label>
+  <label>Phone<input name="phone"></label>
+  <label>Admission year<input type="number" name="admission_year" min="2000" max="2100" required></label>
+  <label>Department<select name="department_id" required>{% for d in departments %}<option value="{{ d.department_id }}">{{ d.department_name }}</option>{% endfor %}</select></label>
+  <label class="full">Address<textarea name="address" rows="3"></textarea></label>
+  <div class="full"><button class="button" type="submit">Save Student</button></div>
+</form></section>
+{% endblock %}

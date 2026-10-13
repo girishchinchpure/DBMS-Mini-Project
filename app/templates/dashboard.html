@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">Academic Administration</p>
+    <h1>Student Academic Management System</h1>
+    <p>Manage student records, courses, faculty, attendance, examinations and academic results from one relational database.</p>
+  </div>
+  <a class="button" href="{{ url_for('main.student_new') }}">+ Add Student</a>
+</section>
+
+<section class="stats">
+  {% for label, key in [('Students','students'),('Courses','courses'),('Faculty','faculty'),('Departments','departments')] %}
+  <div class="stat"><span>{{ label }}</span><strong>{{ stats[key] }}</strong></div>
+  {% endfor %}
+</section>
+
+<section class="card">
+  <div class="card-head"><h2>Recent Students</h2><a href="{{ url_for('main.students') }}">View all</a></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>ID</th><th>Name</th><th>Department</th><th>Admission Year</th></tr></thead>
+    <tbody>
+      {% for s in recent %}
+      <tr><td>{{ s.student_id }}</td><td><a href="{{ url_for('main.student_detail', student_id=s.student_id) }}">{{ s.name }}</a></td><td>{{ s.department_name }}</td><td>{{ s.admission_year }}</td></tr>
+      {% else %}<tr><td colspan="4">No students found.</td></tr>{% endfor %}
+    </tbody>
+  </table></div>
+</section>
+{% endblock %}

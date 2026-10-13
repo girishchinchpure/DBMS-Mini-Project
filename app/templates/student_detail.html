@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head"><div><p class="eyebrow">Student Profile</p><h1>{{ student.first_name }} {{ student.last_name }}</h1></div><a href="{{ url_for('main.students') }}">← Back to students</a></div>
+<section class="profile-grid">
+  <div class="card"><h2>Basic Information</h2><dl class="details">
+    <dt>Student ID</dt><dd>{{ student.student_id }}</dd>
+    <dt>Department</dt><dd>{{ student.department_name }}</dd>
+    <dt>Email</dt><dd>{{ student.email }}</dd>
+    <dt>Phone</dt><dd>{{ student.phone or '—' }}</dd>
+    <dt>Admission Year</dt><dd>{{ student.admission_year }}</dd>
+  </dl></div>
+  <div class="card"><h2>Academic Records</h2><div class="table-wrap"><table>
+    <thead><tr><th>Course</th><th>Term</th><th>Attendance</th><th>Marks</th><th>Grade</th><th>Point</th></tr></thead>
+    <tbody>{% for r in academic %}
+      <tr><td>{{ r.course_code }} — {{ r.course_name }}</td><td>{{ r.academic_year }} / Sem {{ r.semester }}</td><td>{{ r.attendance_percentage or '—' }}{% if r.attendance_percentage is not none %}%{% endif %}</td><td>{% if r.marks_obtained is not none %}{{ r.marks_obtained }}/{{ r.total_marks }}{% else %}—{% endif %}</td><td>{{ r.grade or '—' }}</td><td>{{ r.grade_point or '—' }}</td></tr>
+    {% else %}<tr><td colspan="6">No academic records found.</td></tr>{% endfor %}</tbody>
+  </table></div></div>
+</section>
+{% endblock %}

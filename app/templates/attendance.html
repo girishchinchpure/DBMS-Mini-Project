@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head"><div><p class="eyebrow">Academic Monitoring</p><h1>Attendance</h1></div></div>
+<section class="card"><div class="table-wrap"><table>
+<thead><tr><th>Student</th><th>Course</th><th>Classes Held</th><th>Attended</th><th>Attendance</th></tr></thead>
+<tbody>{% for a in rows %}<tr><td>{{ a.student_id }} — {{ a.student_name }}</td><td>{{ a.course_code }}</td><td>{{ a.classes_held }}</td><td>{{ a.classes_attended }}</td><td><span class="badge {% if a.attendance_percentage < 75 %}danger{% else %}ok{% endif %}">{{ a.attendance_percentage }}%</span></td></tr>{% endfor %}</tbody>
+</table></div></section>
+{% endblock %}
